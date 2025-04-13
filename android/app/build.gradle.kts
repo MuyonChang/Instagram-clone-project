@@ -1,14 +1,19 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id("kotlin-android")
+    id("com.android.application")
     id("dev.flutter.flutter-gradle-plugin")
+
+    id("com.google.gms.google-services")
+    
 }
 
 android {
     namespace = "com.example.flutter_application_1"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+        ndkVersion = "29.0.13113456" // 실제 설치된 NDK 버전으로 설정
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -24,11 +29,15 @@ android {
         applicationId = "com.example.flutter_application_1"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 23
+        targetSdk = 33
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
+        multiDexEnabled = true 
     }
+
+    
 
     buildTypes {
         release {
@@ -41,4 +50,20 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+  // Import the Firebase BoM
+  implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
+  implementation("androidx.multidex:multidex:2.0.1")
+
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // When using the BoM, don't specify versions in Firebase dependencies
+  implementation("com.google.firebase:firebase-analytics")
+
+
+  // Add the dependencies for any other desired Firebase products
+  // https://firebase.google.com/docs/android/setup#available-libraries
 }
