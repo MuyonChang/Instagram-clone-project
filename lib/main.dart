@@ -9,7 +9,7 @@ import 'package:flutter_application_1/responsive/webScreenLayout.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb) async {
+  if(kIsWeb)  {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
         apiKey: "AIzaSyDfBYrzEqdwkGTn4SW-rKnbdxjtEi41or0",
@@ -21,7 +21,7 @@ void main() async{
     );
   }
   
-  if(Platform.isAndroid) async {
+  if(Platform.isAndroid)  {
     await Firebase.initializeApp();
   }
   
