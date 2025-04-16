@@ -3,13 +3,17 @@ import 'package:flutter_application_1/Widgets/TextField.dart';
 import 'package:flutter_application_1/utils/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LoginScreen extends StatelessWidget {
+class Signupscreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
+    _usernameController.dispose();
   }
 
   @override
@@ -28,13 +32,34 @@ class LoginScreen extends StatelessWidget {
                 color: primaryColor,
                 height: 64,
               ),
+              const SizedBox(height: 30),
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage("https://www.google.com/url?sa=i&url=https%3A%2F%2Fnews.sbs.co.kr%2Fnews%2FendPage.do%3Fnews_id%3DN1006256590&psig=AOvVaw39aaDG2aL3lVU_Kbwst64a&ust=1744882727019000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNjZ8uqg3IwDFQAAAAAdAAAAABAI"),
+                  ),
+                  Positioned(
+                    bottom:-15 ,
+                    left: 80,
+                    child: IconButton(onPressed: (){}, icon: Icon(Icons.add,size: 50,))),
+                ],
+              ),
 
-              const SizedBox(height: 64),
+              const SizedBox(height: 30),
 
               TextFieldInput(
+                textEditingController: _usernameController,
+                hintText: 'Enter your Username',
+                textInputType: TextInputType.text,
+              ),
+
+              const SizedBox(height: 20),
+
+               TextFieldInput(
                 textEditingController: _emailController,
                 hintText: 'Enter your email',
-                textInputType: TextInputType.emailAddress,
+                textInputType: TextInputType.text,
               ),
 
               const SizedBox(height: 20),
@@ -45,6 +70,14 @@ class LoginScreen extends StatelessWidget {
                 textInputType: TextInputType.emailAddress,
                 isPass: true,
               ),
+              const SizedBox(height: 20),
+
+              TextFieldInput(
+                textEditingController: _bioController,
+                hintText: 'Enter your bio',
+                textInputType: TextInputType.text,
+              ),
+
               const SizedBox(height: 20),
 
               InkWell(
@@ -75,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                     )
                   ),
                    GestureDetector(
-                    onTap: (){},
+                    onTap:(){},
                      child: Container(
                       child:  Text("Sign up",
                       style: TextStyle(

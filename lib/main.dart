@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Screen/LoginScreen.dart';
+import 'package:flutter_application_1/Screen/SignupScreen.dart';
 import 'package:flutter_application_1/responsive/mobileScreenLayout.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/responsive/webScreenLayout.dart';
@@ -38,10 +40,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'Instagram clone',
-      home: ResponsiveLayout(
+      /*home: ResponsiveLayout(
         webScreenLayout: Webscreenlayout(),
         mobileScreenLayout: Mobilescreenlayout(),
-      ),
+      ),*/
+      home: Signupscreen(),
     );
   }
 }
