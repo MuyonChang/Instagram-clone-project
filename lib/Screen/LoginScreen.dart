@@ -7,6 +7,8 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  LoginScreen({super.key});
+
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -22,7 +24,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(child: Container(), flex: 1),
+              Flexible(flex: 1, child: Container()),
               SvgPicture.asset(
                 'lib/assets/ic_instagram.svg',
                 color: primaryColor,
@@ -49,7 +51,6 @@ class LoginScreen extends StatelessWidget {
 
               InkWell(
                 child: Container(
-                  child: const Text('Log in'),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -58,32 +59,33 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     color: blueColor,
-                  )
+                  ),
+                  child: const Text('Log in')
                 ),
               ),
               const SizedBox(height: 12,),
-              Flexible(child: Container(),flex:1),
+              Flexible(flex:1, child: Container()),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child:  Text("Don't have an account?"),
                     padding: const EdgeInsets.symmetric(
                       vertical: 50,
                       horizontal: 15
-                    )
+                    ),
+                    child:  Text("Don't have an account?")
                   ),
                    GestureDetector(
                     onTap: (){},
                      child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 33,
+                      ),
                       child:  Text("Sign up",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                      ),),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 33,
-                      )
+                      ),)
                                        ),
                    )
                 ],
