@@ -1,17 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Screen/SignupScreen.dart';
 import 'package:flutter_application_1/Widgets/TextField.dart';
+import 'package:flutter_application_1/resources/auth_methods.dart';
+import 'package:flutter_application_1/responsive/mobileScreenLayout.dart';
+import 'package:flutter_application_1/responsive/responsive_Layout.dart';
+import 'package:flutter_application_1/responsive/webScreenLayout.dart';
 import 'package:flutter_application_1/utils/colors.dart';
+import 'package:flutter_application_1/utils/utils.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  bool isloading = false;
   LoginScreen({super.key});
 
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void signUpUser(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => const Signupscreen()));
+  }
+
+  void loginUser(BuildContext context) async {
+    String res = await AuthMethods().loginUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    if (res == 'success') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder:
+              (context) => const ResponsiveLayout(
+                webScreenLayout: Webscreenlayout(),
+                mobileScreenLayout: Mobilescreenlayout(),
+              ),
+        ),
+      );
+    } else {
+      showSnackBar(res, context);
+    }
   }
 
   @override
@@ -50,6 +82,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               InkWell(
+                onTap: () => loginUser(context),
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -60,11 +93,11 @@ class LoginScreen extends StatelessWidget {
                     ),
                     color: blueColor,
                   ),
-                  child: const Text('Log in')
+                  child: const Text('Log in'),
                 ),
               ),
-              const SizedBox(height: 12,),
-              Flexible(flex:1, child: Container()),
+              const SizedBox(height: 12),
+              Flexible(flex: 1, child: Container()),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -72,26 +105,25 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(
                       vertical: 50,
-                      horizontal: 15
+                      horizontal: 15,
                     ),
-                    child:  Text("Don't have an account?")
+                    child: Text("Don't have an account?"),
                   ),
-                   GestureDetector(
-                    onTap: (){},
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 33,
+                  GestureDetector(
+                    onTap: () {
+                      signUpUser(context);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 33),
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      child:  Text("Sign up",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),)
-                                       ),
-                   )
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
-            
           ),
         ),
       ),
